@@ -17,4 +17,4 @@ class location(models.Model):
     country = models.CharField(max_length=201, default='')
 
     def __str__(self) -> str:
-        return self.city
+        return self.city   
