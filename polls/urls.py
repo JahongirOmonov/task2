@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import all, detail
+from .views import getfullname, postfullname, detail
 
 
 urlpatterns=[
-    path('all/', all),
-    path('detail/<int:myid>', detail)
+    path('all/', getfullname.as_view()),
+    path('detail/<int:myid>', detail),
+    path('create/>', postfullname.as_view())
 ]
