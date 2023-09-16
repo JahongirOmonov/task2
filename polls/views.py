@@ -4,42 +4,63 @@ from django.http import JsonResponse
 from .serializer import fullnameSerializer, locationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics
 
-# Create your views here.
+class GetAllFullname(generics.ListAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
 
-# def all(request):
-#     all=fullname.objects.all()
-#     mylist =fullnameSerializer(all, many=True)
-#     # for i in all:
-#     #     mylist.append({
-#     #         'name':i.name,
-#     #         'surname':i.surname,
-#     #         'thirdname':i.thirdname
-#     #     })
-#     return JsonResponse(mylist.data, safe=False)
+class GetDetailFullname(generics.RetrieveAPIView):
+    queryset = fullname.objects.all()
+    serializer_class=fullnameSerializer
 
-class getfullname(APIView):
-    def get(self, request):
-        bir = fullname.objects.all()
-        srr=fullnameSerializer(bir, many=True)
-        return Response(srr.data)
+class PostFullname(generics.CreateAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
 
-    
+class PatchFullname(generics.UpdateAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
 
+class DeleteFullname(generics.DestroyAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
 
-def detail(request, myid):
-    # each = get_object_or_404(location, id=myid)
-    each = location.objects.filter(id=myid)
-    # data={'City name':each.city, 'Country name':each.country}
-    fornow=locationSerializer(each, many=True)
-    return JsonResponse(fornow.data, safe=False)
+class PostGetFullname(generics.ListCreateAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
 
-class postfullname(APIView):
-    def post(self, request):
-        main_body=request.data
-        sss = fullnameSerializer(data=main_body)
-        if sss.is_valid():
-            sss.save()
-            return Response(sss.data)
-        return Response(sss.errors)
+class AllFunctionFullname(generics.RetrieveUpdateDestroyAPIView):
+    queryset=fullname.objects.all()
+    serializer_class=fullnameSerializer
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+class GetAllLocation(generics.ListAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
+
+class GetDetailLocation(generics.RetrieveAPIView):
+    queryset = location.objects.all()
+    serializer_class=locationSerializer
+
+class PostLocation(generics.CreateAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
+
+class PatchLocation(generics.UpdateAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
+
+class DeleteLocation(generics.DestroyAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
+
+class PostGetLocation(generics.ListCreateAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
+
+class AllFunctionLocation(generics.RetrieveUpdateDestroyAPIView):
+    queryset=location.objects.all()
+    serializer_class=locationSerializer
 
