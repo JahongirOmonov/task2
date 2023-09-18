@@ -5,10 +5,16 @@ from .serializer import fullnameSerializer, locationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 class GetAllFullname(generics.ListAPIView):
     queryset=fullname.objects.all()
     serializer_class=fullnameSerializer
+    permission_classes=(IsAuthenticated,)
+
+    def get_queryset(self):
+        print(self.request.user)
+        return fullname.objects.all()
 
 class GetDetailFullname(generics.RetrieveAPIView):
     queryset = fullname.objects.all()
@@ -39,6 +45,11 @@ class AllFunctionFullname(generics.RetrieveUpdateDestroyAPIView):
 class GetAllLocation(generics.ListAPIView):
     queryset=location.objects.all()
     serializer_class=locationSerializer
+    permission_classes=(IsAuthenticated)
+
+    def get_queryset(self):
+        print(self.request.user)
+        return location.objects.all()
 
 class GetDetailLocation(generics.RetrieveAPIView):
     queryset = location.objects.all()
